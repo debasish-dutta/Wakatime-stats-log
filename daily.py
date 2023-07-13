@@ -7,7 +7,7 @@ from google.cloud import storage
 
 load_dotenv()
 
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("WT_API")
 ENCODED_API_KEY = base64.b64encode(API_KEY.encode()).decode()
 headers = {
             'Authorization': f'Basic {ENCODED_API_KEY}'}
