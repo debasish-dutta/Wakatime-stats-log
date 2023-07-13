@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '50 23 * * *'  # Run every day at midnight (UTC)
 env:
-  CLIENT_ID: ${{ secrets.WT_API }}
+  WT_API: ${{ secrets.WT_API }}
   GCS_BUCKET: ${{ secrets.GCS_BUCKET }}
   
 jobs:
