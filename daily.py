@@ -18,7 +18,7 @@ def create_storage_client():
 def upload_gcp(json_data):
     destination_blob_name = f'daily-logs/{json_data}'
     # storage_client = create_storage_client()
-    storage_client = storage.Client() // For github actions
+    storage_client = storage.Client() # For github actions
     bucket = storage_client.bucket('wakatime-data')
     blob = bucket.blob(destination_blob_name)
     blob.upload_from_filename(json_data)
