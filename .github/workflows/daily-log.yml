@@ -1,7 +1,7 @@
 name: Daily Log
 
 on:
-  workflow_dispatch:
+#   workflow_dispatch:
   schedule:
     - cron: '50 23 * * *'  # Run every day at midnight (UTC)
 env:
