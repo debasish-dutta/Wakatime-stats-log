@@ -6,6 +6,7 @@ on:
     - cron: '50 23 * * *'  # Run every day at midnight (UTC)
 env:
   CLIENT_ID: ${{ secrets.WT_API }}
+  GCS_BUCKET: ${{ secrets.GCS_BUCKET }}
   
 jobs:
   run-script:
@@ -25,12 +26,12 @@ jobs:
 #         with:
 #           service_account_key: ${{ secrets.GCP_SA_KEY }}
 #           project_id: wakatime-stats
+
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
-
-      - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
-
+        uses: google-github-actions/auth@v1
+        with:
+          credientials_json: $ {{ secrets.GCS_SA_KEY }}
+        
       - name: Install dependencies
         run: pip install -r requirements.txt
 
