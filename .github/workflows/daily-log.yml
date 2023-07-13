@@ -1,8 +1,9 @@
 name: Daily Log
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # Run every day at midnight (UTC)
+    - cron: '50 23 * * *'  # Run every day at midnight (UTC)
 env:
   CLIENT_ID: ${{ secrets.WT_API }}
   
