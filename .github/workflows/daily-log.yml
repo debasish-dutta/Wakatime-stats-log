@@ -1,0 +1,32 @@
+name: Daily Log
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight (UTC)
+env:
+  CLIENT_ID: ${{ secrets.WT_API }}
+  
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9  # Replace with the desired Python version
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.4.3
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: wakatime-stats
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script
+        run: python daily.py
