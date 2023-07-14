@@ -31,7 +31,7 @@ def get_daily_stats():
     params = {
             # 'date': date
         }
-    response = requests.get('https://wakatime.com/api/v1/users/current/status_bar/today', headers=headers, params=params)
+    response = requests.get('https://wakatime.com/api/v1/users/current/summaries?range=Yesterday', headers=headers, params=params)
    
     #print(response.status_code)
     #print(response.json())
@@ -39,10 +39,10 @@ def get_daily_stats():
     if response.status_code == 200:
         data = response.json()
         if 'data' in data:
-            total_seconds = data['data']['grand_total']['total_seconds']
+            total_seconds = data['cumulative_total']['seconds']
             hours = total_seconds // 3600
             minutes = (total_seconds % 3600) // 60
-            date = data['data']['range']['date']
+            date = data['data'][0]['range']['date']
             print(f"Total coding time on {date}: {hours} hours {minutes} minutes")
             
             with open(f'coding_stats_{date}.json', 'w') as f:
